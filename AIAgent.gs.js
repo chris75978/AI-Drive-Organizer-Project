@@ -4,18 +4,36 @@
  * analyze, categorize, rename, and move files from a source folder
  * to a structured set of destination folders.
  *
- * * HOW TO USE:
- * 1. Select the `runFileOrganizer` function from the dropdown menu at the top.
- * 2. Click the "Run" button.
- * 3. The script has a 6-minute time limit. You may need to click "Run"
- * multiple times to process all your files. It will pick up where it left off
- * by only processing the files remaining in the source folder.
+ * * HOW TO USE: (This is the code for the GitHub project)
+ * 1. Go to script.google.com and create a new project.
+ * 2. Paste this entire code into the `Code.gs` file.
+ * 3. GET YOUR GEMINI API KEY:
+ * - Go to your Google Cloud Project's "APIs & Services" -> "Credentials" page.
+ * - Click "+ CREATE CREDENTIALS" -> "API key".
+ * 4. Paste your NEW API key into the `GEMINI_API_KEY` variable below.
+ * 5. FIND YOUR FOLDER IDs:
+ * - A folder's ID is the last part of its URL.
+ * 6. Paste your IDs into the `SOURCE_FOLDER_ID` and `DESTINATION_PARENT_FOLDER_ID` variables.
+ * 7. ENABLE THE "DRIVE API":
+ * - In the Apps Script editor, click on "Services" in the left-hand menu.
+ * - Find "Drive API" and click "Add". (This is needed for .docx, .pdf, and image conversion).
+ * 8. ENABLE THE "GEMINI API":
+ * - In your Google Cloud Project, go to "APIs & Services" -> "Dashboard".
+ * - Click "+ ENABLE APIS & SERVICES".
+ * - Search for "Gemini API" and click "Enable".
+ * 9. ENABLE BILLING:
+ * - You must link a billing account to your project to use the Gemini API.
+ * - Go to: https://console.cloud.google.com/billing/projects
+ * 10. RUN THE SCRIPT:
+ * - Select the `runFileOrganizer` function from the dropdown menu at the top.
+ * - Click the "Run" button.
+ * - The script has a 6-minute time limit. You may need to run it multiple times.
  */
 
 // --- CONFIGURATION ---
-const GEMINI_API_KEY = 'AIzaSyDENK90fgc76gSaAToVVe2MmFoE4hHx8eQ'; // <-- YOUR API KEY
-const SOURCE_FOLDER_ID = '1kbzD8TLDhsrOl-KV3zgUaTAHFB4c0J_9'; // <-- Your "Organized Folder" ID
-const DESTINATION_PARENT_FOLDER_ID = '1kbzD8TLDhsrOl-KV3zgUaTAHFB4c0J_9'; // <-- Your "Organized Folder" ID
+const GEMINI_API_KEY = 'PASTE_YOUR_API_KEY_HERE'; // <-- PASTE YOUR KEY HERE (Keep this private!)
+const SOURCE_FOLDER_ID = 'PASTE_YOUR_SOURCE_FOLDER_ID_HERE'; // <-- e.g., "Inbox" folder
+const DESTINATION_PARENT_FOLDER_ID = 'PASTE_YOUR_DESTINATION_FOLDER_ID_HERE'; // <-- e.g., "Organized Files" folder
 
 // Prompt for the AI to generate a filename AND category
 const AI_PROMPT = `
@@ -405,4 +423,3 @@ function getFileExtension(filename, mimeType) {
   // For Google Docs, text files, etc.
   return ''; 
 }
-
